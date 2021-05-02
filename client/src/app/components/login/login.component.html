@@ -1,0 +1,58 @@
+
+  
+  <mat-grid-list cols="3" rowHeight="90vh">
+    <mat-grid-tile>  
+        <div class="warraper" *ngIf="!ms.isLoggedIn()">
+            <form [formGroup]="loginForm" (ngSubmit)="handleSubmit()" >
+                <mat-form-field appearance="fill">
+                    <mat-label>User ID</mat-label>
+                    <input type="text" formControlName="userId" matInput>
+                    <mat-error *ngIf="loginForm.controls.userId.invalid">
+                      User ID is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+           
+            <mat-form-field appearance="fill">
+                <mat-label>Password</mat-label>
+                <input type="password" formControlName="password" matInput>
+                <mat-error *ngIf="loginForm.controls.password.invalid">
+                  Password is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            <br/>
+            <button mat-stroked-button type="submit" value="Login" [disabled]="loginForm.invalid">Login</button>
+            
+            
+            <br/>
+            <button mat-button routerLink="/register" class="register">Don't have an account yet? Register!</button>
+          </form>
+        </div>
+
+            <div class="warraper" *ngIf="ms.isLoggedIn()">
+                <button type="button" class="block" (click)="enterToShopping()">{{openCart ? 'Resume Shopping' : 'Start Shopping'}}</button>
+
+            </div>
+
+    </mat-grid-tile>
+    <mat-grid-tile class="middle">
+        <h3>Welcome to <strong> Hayarkan (Greengrocer)</strong> Online <br/>
+        Order today and receive tomorrow<br/>
+        Delivering the freshest fruit, vegetables, salad and herbs.<br/>
+         Find the fresh produce you need for the perfect Shabbath dinner.</h3>
+ 
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div class="info">
+            <h1>General Information</h1>
+            <p *ngIf="productsInStock">The quantity of products available on the site: {{productsInStock.length}}</p>
+            <p *ngIf="ordersPlaced">The amount of orders placed on the site:{{ordersPlaced.length}}</p>
+            <br> 
+            <p>{{shoppingStatusMsg}}</p> 
+        </div>
+     
+
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  
+  

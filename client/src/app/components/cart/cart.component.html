@@ -1,0 +1,63 @@
+<div class="list" *ngIf="this.cs.loggedCart">
+<h1>Shopping Cart</h1>
+<div class="row col-10">
+  <p> 
+    You have {{ this.cs.loggedCart.products?.length }} products in your shopping cart.
+   
+    <button mat-raised-button *ngIf="this.cs.loggedCart.products?.length" (click)="clearCart(this.cs.loggedCart._id)" class="btn btn-danger">Clear Shopping Cart</button>
+  </p>
+  <table class="table">
+    <thead> 
+      <tr> 
+        <th></th>
+        <th class="text-center" style="width: 140px">Product</th>
+        <th class="text-center" style="width: 80px">Quantity</th>
+        <th class="text-right" style="width: 100px">Total Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of this.cs.loggedCart.products" >
+        <td >
+
+          <div [style.backgroundImage]="'url(' + p.product_id.image + ')'" class="thumbnail">
+            <span class="btn btn-danger btn-sm" >
+              <button mat-button (click)="removeItem(this.cs.loggedCart._id, p.product_id._id)">
+                ❌
+                </button>
+
+            </span>
+          </div>
+
+            <!-- <img src="{{p.product_id.image}}" alt="" width="75px" srcset=""> -->
+        </td> 
+        <td>
+           {{ p.product_id.name}}
+        </td>
+        <td>
+           {{p.quantity}}
+        </td>
+        <td class="text-right"> 
+          {{ p.sub_total_price | currency:'ILS':'symbol' }}
+                  <!-- <button mat-button (click)="openDialog(item)">
+            <mat-icon>remove_shopping_cart</mat-icon>
+                </button> -->
+
+
+        </td>
+         
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th></th>
+        <th></th> 
+        <th></th>
+        <th class="text-right">{{ this.cs.loggedCart.total_price | currency:'ILS':'symbol' }}</th>
+      </tr>
+    </tfoot>
+  </table> 
+  <button mat-raised-button color="accent" routerLink="/order" *ngIf="this.cs.loggedCart.products?.length" class="btn btn-primary">Check Out</button>
+</div> 
+ 
+</div>
+  

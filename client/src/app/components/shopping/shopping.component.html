@@ -1,0 +1,39 @@
+<mat-toolbar class="example-toolbar">
+  
+  <button type="button" mat-button (click)="drawer.toggle()">
+    <mat-icon>shopping_cart</mat-icon> 
+  </button> 
+  |    
+  <button type="button" mat-button (click)="ChangeCategory(categoryId.Fruits)"> 
+    <h2>Fruits</h2>  </button>
+    <button type="button" mat-button (click)="ChangeCategory(categoryId.Vegetables)">
+      <h2> Vegetables</h2>  
+    </button>
+    <button type="button" mat-button (click)="ChangeCategory(categoryId.Herbs)">
+      <h2>Herbs</h2>  </button>  
+       
+      <mat-form-field class="right_header">
+        <mat-label>Search product</mat-label>
+        <input matInput type="text" [(ngModel)]="searchWord" > 
+        <button mat-button *ngIf="searchWord" matSuffix mat-icon-button aria-label="Search" (click)="SearchProducts(searchWord)">
+          <mat-icon>search</mat-icon>
+        </button>    
+      </mat-form-field>     
+      
+</mat-toolbar>
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <app-cart></app-cart> 
+  </mat-drawer>
+  
+  <div class="example-sidenav-content">
+    <app-catalog></app-catalog>
+  </div>
+
+</mat-drawer-container>
+
+
+
+
+
+  

@@ -1,0 +1,29 @@
+body{
+  overflow: visible;
+}
+
+
+.list{
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: center;
+  }
+
+.example-card {
+    max-width: 160px;
+    
+    position: relative;
+    display: inline-block;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin:11px;
+    /* padding: 10px; */
+
+  }
+  
+  /* .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  } */

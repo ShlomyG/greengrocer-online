@@ -1,0 +1,79 @@
+<mat-toolbar class="example-toolbar">
+    <h1><strong>Admin Zone</strong>  </h1> <br/>
+    
+    <button type="button" mat-button (click)="addProduct()" title="add product">
+      <mat-icon>add</mat-icon>
+    </button>
+    |  
+    <button type="button" mat-button (click)="ChangeCategory(categoryId.Fruits)"> 
+      <h2>Fruits</h2>  </button>
+      <button type="button" mat-button (click)="ChangeCategory(categoryId.Vegetables)">
+        <h2> Vegetables</h2>  
+      </button>
+      <button type="button" mat-button (click)="ChangeCategory(categoryId.Herbs)">
+        <h2>Herbs</h2>  </button>  
+
+        
+        <mat-form-field class="right_header">
+          <mat-label>Search product</mat-label>
+          <input matInput type="text" [(ngModel)]="searchWord"> 
+          <button mat-button *ngIf="searchWord" matSuffix mat-icon-button aria-label="Search" (click)="SearchProducts(searchWord)">
+            <mat-icon>search</mat-icon>
+          </button>  
+        </mat-form-field>
+        
+  </mat-toolbar>
+  <mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side" [opened]="this.as.sidenav">
+        <form [formGroup]="adminForm" >
+            <mat-form-field appearance="fill">
+                <mat-label>Category:</mat-label>
+                <mat-select name="category" formControlName="category_id">
+                    <mat-option *ngFor="let category of this.categoryId | keyvalue" [value]="category.value">{{category.key}}</mat-option>
+                    </mat-select>   
+                    <mat-error *ngIf="adminForm.controls.category_id.invalid">
+                      Category is <strong>required</strong>
+                    </mat-error>
+                      </mat-form-field>
+        
+        <mat-form-field appearance="fill">
+            <mat-label>Name of product</mat-label>
+            <input type="text" formControlName="name" matInput required>
+            <mat-error *ngIf="adminForm.controls.name.invalid">
+              Name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field> 
+
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Image Source</mat-label>
+            <input type="text" formControlName="image" matInput required>
+            <mat-error *ngIf="adminForm.controls.image.invalid">
+                Image is <strong>required</strong>
+              </mat-error>
+
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Price</mat-label>
+            <input required matInput formControlName="price" type="number" inputmode="numeric" placeholder="xx.xx">
+            <mat-error *ngIf="adminForm.controls.price.invalid">
+                Price is <strong>required</strong>
+              </mat-error> 
+        </mat-form-field> 
+
+          
+        <br/>
+        <button mat-stroked-button type="submit" value="order" (click)="handleSubmit()" *ngIf="this.choose_product==undefined">Add Product</button>
+        <button mat-stroked-button type="submit" value="order" (click)="handleEdit()" *ngIf="this.choose_product!=undefined">Edit Product</button>
+        <button mat-stroked-button  (click)="closeForm()">Close</button>
+
+          
+        </form>
+
+    </mat-drawer>
+    
+    <div class="example-sidenav-content">
+      <app-catalog (editEvent)="receiveProduct($event)"></app-catalog>
+    </div>
+  
+  </mat-drawer-container>

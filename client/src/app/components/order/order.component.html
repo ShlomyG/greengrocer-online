@@ -1,0 +1,126 @@
+<mat-grid-list cols="5" rowHeight="12vh"> 
+    <mat-grid-tile 
+        [colspan]="5" 
+        [rowspan]="1" 
+        [style.background]="'lightgreen'">
+        <mat-toolbar class="example-toolbar" >
+
+        <button mat-stroked-button (click)="backToCart()" class="right_header">Back To Cart</button>
+        <mat-form-field >
+        <mat-label>Search in order</mat-label>
+           <input matInput type="text" placeholder="Search Here" [(ngModel)]="value" (input)="handleSearch()" class="search">
+           </mat-form-field> 
+           </mat-toolbar>
+    </mat-grid-tile>   
+    <mat-grid-tile   
+        [colspan]="2"   
+        [rowspan]="6">
+     <div id="table">
+         <div *ngIf="this.orderDone" class="recipt_header">
+             <h2>
+            Recipt to {{this.ms.loggedUser.fname}} {{this.ms.loggedUser.lname }} <br/>
+            Delivery date is  {{this.orderForm.controls.delivery_date.value | date}} <br/>
+        </h2>
+         </div>
+        <table  class="table"> 
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="text-center" style="width: 150px">Product</th>
+                    <th class="text-center" style="width: 100px">Quantity</th>
+                    <th class="text-right" style="width: 120px">Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of this.cs.loggedCart.products">
+                    <td >
+                        <div [style.backgroundImage]="'url(' + p.product_id.image + ')'" class="thumbnail">
+                        </div>
+                        
+                      </td> 
+                      <td class="name">
+                          {{ p.product_id.name}}
+                        </td>
+                        <td>
+                            {{p.quantity}}
+                      </td>
+                      <td class="text-right"> 
+                          {{ p.sub_total_price | currency:'ILS':'symbol' }}
+                        </td>      
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th class="text-right">{{ this.cs.loggedCart.total_price | currency:'ILS':'symbol' }}</th>
+                    </tr>
+                </tfoot>
+                
+            </table>
+     </div>
+    </mat-grid-tile>  
+    <mat-grid-tile 
+        [colspan]="3"  
+        [rowspan]="6"   
+        >       
+          <div class="warraper">
+              <h1>Shipping Details</h1>
+              <h3>{{this.ms.loggedUser.fname}} {{this.ms.loggedUser.lname}}</h3>
+            <form [formGroup]="orderForm" >
+                <mat-form-field appearance="fill">
+                    <mat-label>City:</mat-label>
+                    <mat-select name="city" formControlName="city">
+                        <mat-option *ngFor="let city of this.ms.cities" [value]="city">{{city}}</mat-option>
+                        </mat-select>   
+                        <mat-error *ngIf="orderForm.controls.city.invalid">
+                          City is <strong>required</strong>
+                        </mat-error>
+                          </mat-form-field>
+           
+            <mat-form-field appearance="fill">
+                <mat-label>Street</mat-label>
+                <input (click)="getOrderDetails()" type="text" formControlName="street" matInput >
+                <mat-error *ngIf="orderForm.controls.street.invalid">
+                  Street is <strong>required</strong>
+                </mat-error>
+              </mat-form-field> 
+
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" [min]="minDate" formControlName="delivery_date" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker> 
+                <mat-error *ngIf="orderForm.controls.delivery_date.invalid">
+                    Delivery Date is <strong>required</strong>
+                  </mat-error>
+  
+              </mat-form-field>
+ 
+              <mat-form-field class="example-full-width">
+                <mat-label>Enter Credit Card</mat-label>
+                <input required matInput formControlName="credit_card" type="number" inputmode="numeric" placeholder="xxxx xxxx">
+                <mat-error *ngIf="orderForm.controls.credit_card.invalid">
+                    User ID must be <strong>8 digits</strong> 
+                </mat-error>
+
+            </mat-form-field>
+    
+              
+
+
+            <br/>
+            <button mat-stroked-button type="submit" value="order" (click)="sendOrder()" [disabled]="orderForm.invalid">Send Order</button>
+
+              
+            </form>
+        </div>
+
+
+
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  
+

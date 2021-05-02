@@ -1,0 +1,41 @@
+app-catalog{
+    width: 100%; 
+    height: 100%; 
+    /* overflow: scroll; */
+} 
+
+.example-toolbar{
+background-color:lightgreen;
+position:relative;
+}
+
+.example-container {
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}  
+
+.example-sidenav-content {
+    /* display: flex; */
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .example-sidenav {
+    padding: 20px;
+  }
+  
+  mat-drawer{
+      width: 26%; 
+  }
+
+  .example-form-field{
+    margin-top: 17px;
+    margin-left: 450px;
+  }
+
+
+  .right_header {
+   
+     position: absolute; top: 0px; right: 15px}

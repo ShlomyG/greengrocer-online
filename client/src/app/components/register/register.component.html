@@ -1,0 +1,99 @@
+<mat-grid-list cols="3" rowHeight="90vh">
+  <mat-grid-tile class="middle"></mat-grid-tile>
+  <mat-grid-tile>
+    <div class="main"> 
+    <div *ngIf="this.res!==true" class="step1">
+      <br> 
+      <form [formGroup]="myForm"> 
+        <br/> 
+        <h1>Register - Step 1</h1>
+          <ng-template>Fill out your name</ng-template>
+            <mat-form-field [style.width.px]=327>
+            <mat-label>User ID</mat-label> 
+            <input matInput type="number" placeholder="xxxxxxxx" formControlName="userId">
+            <mat-error *ngIf="myForm.controls.userId.invalid">
+                User ID must be <strong>8 - 9 digits</strong> 
+              </mat-error> 
+   
+        </mat-form-field>
+
+            <mat-form-field [style.width.px]=327>
+            <mat-label>E-Mail</mat-label>
+            <input matInput type="email" placeholder="email" formControlName="email"type="email" name="email" ngModel email="true" >
+            <mat-error *ngIf="myForm.controls.email.invalid">
+                Email valid is <strong>required</strong>
+              </mat-error>
+  
+        </mat-form-field>   
+         <mat-form-field [style.width.px]=327>
+         <mat-label>Password</mat-label>  
+            <input matInput type="password" placeholder="password" formControlName="password">
+            <mat-error *ngIf="myForm.controls.password.invalid">
+                Password should <strong>contain 6 characters</strong>
+              </mat-error>
+ 
+            </mat-form-field >
+            <mat-form-field [style.width.px]=327>
+                <mat-label>Password Confirm</mat-label> 
+            <input matInput type="password" placeholder="password confirm" formControlName="passwordConfirm">
+            <mat-error *ngIf="myForm.controls.passwordConfirm.invalid">
+                Password Confirm is <strong>required</strong> 
+              </mat-error>
+            </mat-form-field>   
+            <br>
+            <br>
+            <button mat-raised-button type="submit" (click)="checkregister()" [disabled]="myForm.controls.userId.invalid || myForm.controls.password.invalid || myForm.controls.email.invalid">Next >></button>
+            <br>
+            <button mat-button routerLink="/login" class="register">already have an account? Login</button>
+
+        </form>
+    </div>
+    <div *ngIf="this.res" class="step2">
+      <form [formGroup]="myForm" >
+        <h1>Register - Step 2</h1>
+            <mat-form-field [style.width.px]=327>
+                <mat-label>First name</mat-label>    
+            <input matInput type="text" formControlName="fname">
+            <mat-error *ngIf="myForm.controls.fname.invalid">
+                First name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field [style.width.px]=327>
+                <mat-label>First name</mat-label>    
+                <input matInput type="text"  formControlName="lname">
+                <mat-error *ngIf="myForm.controls.lname.invalid">
+                Last name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field [style.width.px]=327>
+                <mat-label>City</mat-label>    
+            <mat-select name="city" formControlName="city">
+                <mat-option *ngFor="let city of this.ms.cities" [value]="city">{{city}}</mat-option>
+            </mat-select>
+                <mat-error *ngIf="myForm.controls.city.invalid">
+                    City is <strong>required</strong>
+                  </mat-error>
+            </mat-form-field>
+
+            <mat-form-field [style.width.px]=327>
+                <mat-label>Address</mat-label>    
+                <input matInput type="text"  formControlName="address">
+                <mat-error *ngIf="myForm.controls.address.invalid">
+                Last name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+ 
+            <button mat-raised-button type="submit" (click)="handleSubmit()" [disabled]="myForm.invalid">Register</button>
+            <br> 
+            
+            <button mat-button routerLink="/login" class="register">already have an account? Login</button>
+          </form>
+        </div>
+</div> 
+</mat-grid-tile>
+  <mat-grid-tile class="middle"></mat-grid-tile>
+</mat-grid-list>
+
+

@@ -1,0 +1,11 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+     
+    
+  .header {
+      background-color:#4CAF50;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-size: 26px;
+
+  }
